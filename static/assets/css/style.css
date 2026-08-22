@@ -386,8 +386,10 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
+  min-height: 100vh;
+  height: auto;
   background: #37517e;
+  padding: 100px 0 60px 0;
 }
 
 #hero .container {
@@ -454,8 +456,10 @@ h6 {
 
 @media (max-width: 991px) {
   #hero {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     text-align: center;
+    padding: 110px 0 60px 0;
   }
 
   #hero .animated {
