@@ -1148,56 +1148,41 @@
 
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
 
-                        <form action="https://formsubmit.co/techminddeveloper@gmail.com" method="POST" role="form" id="form1" name="form1">
+                        <form action="https://formsubmit.co/ajax/techminddeveloper@gmail.com" method="POST" role="form" class="php-email-form" id="contactFormOld">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" value="New Inquiry from Tech Mind Developers Website!">
-                        <input type="hidden" name="_next" value="https://techminddeveloper.github.io/Tech-Mind-Developers/">
-                            
-                            
-                                
-                                
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="name">Your Name</label>
-                                            <input type="text" name="name" class="form-control" id="name" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="mobile">Your Mobile</label>
-                                            <input type="tel" class="form-control" name="mobile" id="mobile" title="Mobile number is incorrect" pattern="[1-9]{1}[0-9]{9}" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="name">Your Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="name">Your Location</label>
-                                            <input type="text" name="loc" class="form-control" id="loc" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Subject</label>
-                                        <input type="text" class="form-control" name="subject" id="subject" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Message</label>
-                                        <textarea class="form-control" name="message" id="message" rows="6" required></textarea>
-                                    </div>
-                                    <div class="my-3">
-                                        <div class="loading" id="divloader" ></div>
-                                        <div class="error-message"></div>
-                                        
-
-                                        <div id="lblsentmessage" class="sent-message" style="display:none;">Your message has been sent. Thank you!</div>
-                                    </div>
-                                    <div class="text-center">
-
-                                        
-                                        <button type="submit" class="btnsub">Send Message</button>
-
-                                    </div>
-                                
-                            
-                        </form>
+                        
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Your Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="mobile">Mobile / Phone Number</label>
+                                <input type="tel" class="form-control" name="mobile" id="mobile" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Your Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="subject">Subject</label>
+                                <input type="text" name="subject" class="form-control" id="subject" placeholder="Project Inquiry" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" name="message" id="message" rows="6" placeholder="Tell us about your project requirements..." required></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading" id="oldFormLoading" style="display:none;">Loading...</div>
+                            <div class="error-message" id="oldFormError" style="display:none;">Oops! There was a problem sending your message. Please try again.</div>
+                            <div class="sent-message" id="oldFormSuccess" style="display:none;">✓ Your message has been sent successfully! Thank you for reaching out.</div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" id="oldSubmitBtn">Send Message</button>
+                        </div>
+                    </form>
                     </div>
 
                 </div>
@@ -1314,6 +1299,49 @@
     <!-- Template Main JS File -->
     <script src="static/assets/js/main.js"></script>
 
+
+<script>
+document.getElementById('contactFormOld').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = document.getElementById('oldSubmitBtn');
+    var loading = document.getElementById('oldFormLoading');
+    var success = document.getElementById('oldFormSuccess');
+    var error = document.getElementById('oldFormError');
+    
+    loading.style.display = 'block';
+    success.style.display = 'none';
+    error.style.display = 'none';
+    btn.disabled = true;
+    btn.innerText = 'Sending...';
+
+    var formData = new FormData(form);
+
+    fetch('https://formsubmit.co/ajax/techminddeveloper@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        loading.style.display = 'none';
+        success.style.display = 'block';
+        btn.disabled = false;
+        btn.innerText = 'Send Message';
+        form.reset();
+    })
+    .catch(function(err) {
+        loading.style.display = 'none';
+        error.style.display = 'block';
+        btn.disabled = false;
+        btn.innerText = 'Send Message';
+    });
+});
+</script>
 </body>
 
 </html>
