@@ -1,0 +1,9 @@
+# Create clean .gitignore for web project
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+.vs/
+.user.ini
+.well-known/
